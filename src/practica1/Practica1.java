@@ -29,7 +29,7 @@ public class Practica1 {
                 System.out.println("\n Introdueix el primer numero. ");
                 numero1 = sc.nextLine();
             } while (!numero1.matches("[+-]?[\\d]*[.]?[\\d]+"));
-            double nume1 = Double.parseDouble(numero1);
+            //double nume1 = Double.parseDouble(numero1);
             double n1 = new Double(numero1);
 
             do {
@@ -52,14 +52,14 @@ public class Practica1 {
                 System.out.println("\n Introdueix el segon numero.");
                 numero2 = sc.nextLine();
             } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-            double nume2 = Double.parseDouble(numero2);
+            //double nume2 = Double.parseDouble(numero2);
             double n2 = new Double(numero2);
 
             do {
                 comprobar = true;
                 switch (operacion) {
                     case "+":
-                        res = n2 + n2;
+                        res = n1 + n2;
                         break;
                     case "-":
                         res = n1 - n2;
@@ -75,13 +75,13 @@ public class Practica1 {
                                         + "per a  evitar errors coloca un altre valor.");
                                 numero2 = sc.nextLine();
                             } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-                            nume2 = Double.parseDouble(numero2);
+              //              nume2 = Double.parseDouble(numero2);
                             n2 = new Double(numero2);
                         }
                         res = n1 / n2;
                         break;
                     case "*":
-                        res = Math.pow(n1, n1);
+                        res = Math.pow(n1, n2);
                         break;
                     case "%":
                         while (n2 == 0) {
@@ -90,7 +90,7 @@ public class Practica1 {
                                         + "per a  evitar errors coloca un altre valor.");
                                 numero2 = sc.nextLine();
                             } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-                            nume2 = Double.parseDouble(numero2);
+                //            nume2 = Double.parseDouble(numero2);
                             n2 = new Double(numero2);
                         }
                         res = n1 % n2;
