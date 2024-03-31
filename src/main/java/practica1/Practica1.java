@@ -7,117 +7,68 @@ package practica1;
 
 import java.util.Scanner;
 
-/**
- *
- * @author esther
- */
 public class Practica1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         double res = 0;
         String operacion;
-        boolean comprobar = false;
 
         do {
-
             String numero1;
             do {
-                System.out.println(&quot;\n INTRODUEIX EL NUMERO 1 . &quot;);
+                System.out.println("\nINTRODUEIX EL NUMERO 1: ");
                 numero1 = sc.nextLine();
             } while (!numero1.matches("[+-]?[\\d]*[.]?[\\d]+"));
-            //double nume1 = Double.parseDouble(numero1);
-            double n1 = new Double(numero1);
+            double n1 = Double.parseDouble(numero1);
 
             do {
-                System.out.println(&quot;\n INDICA LA OPERACIÓ QUE VOLS FER
-                 (Indica el signe)&quot;);
-                System.out.println(&quot; + = sumar \n - = restar \n&quot;
-                + &quot; x = multiplicar \n / = dividir \n * = elevar primer num al segon num.&quot;
-                + &quot;\n % = residu&quot;); 
+                System.out.println("\nINDICA LA OPERACIÓ QUE VOLS FER (Indica el signe)");
+                System.out.println("+ = sumar\n- = restar\nx = multiplicar\n/ = dividir\n* = elevar primer num al segon num.\n% = residu");
                 operacion = sc.nextLine();
-                if (operacion.equals("+") || operacion.equals("-") || operacion.equals("x")
-                        || operacion.equals("X") || operacion.equals("/") || operacion.equals("%")
-                        || operacion.equals("*")) {
-                    comprobar = true;
-                } else {
-                    comprobar = false;
-                }
-            } while (comprobar != true);
+            } while (!operacion.matches("[+\\-xX/*%]"));
 
             String numero2;
             do {
-                System.out.println(&quot;\n INTRODUEIX EL NUMERO 2 . &quot;);
+                System.out.println("\nINTRODUEIX EL NUMERO 2: ");
                 numero2 = sc.nextLine();
             } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-            //double nume2 = Double.parseDouble(numero2);
-            double n2 = new Double(numero2);
+            double n2 = Double.parseDouble(numero2);
 
-            do {
-                comprobar = true;
-                switch (operacion) {
-                    case "+":
-                        res = n1 + n2;
-                        break;
-                    case "-":
-                        res = n1 - n2;
-                        break;
-                    case "x":
-                    case "X":
-                        res = n1 * n2;
-                        break;
-                    case "/":
-                        while (n2 == 0) {
-                            do {
-                                System.err.println(&quot; AL DENOMINADOR HI HA UN 0. \n&quot;
-                                + &quot; PER A EVITAR ERROR, COLOCA UN ALTRE NÚMERO.&quot;);
-                                numero2 = sc.nextLine();
-                            } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-              //              nume2 = Double.parseDouble(numero2);
-                            n2 = new Double(numero2);
-                        }
-                        res = n1 / n2;
-                        break;
-                    case "*":
-                        res = Math.pow(n1, n2);
-                        break;
-                    case "%":
-                        while (n2 == 0) {
-                            do {
-                                System.err.println(&quot; AL DENOMINADOR HI HA UN 0. \n&quot;
-                                + &quot; PER A EVITAR ERROR, COLOCA UN ALTRE NÚMERO.&quot;);
-                                numero2 = sc.nextLine();
-                            } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-                //            nume2 = Double.parseDouble(numero2);
-                            n2 = new Double(numero2);
-                        }
-                        res = n1 % n2;
-                        break;
+            switch (operacion) {
+                case "+" -> res = n1 + n2;
+                case "-" -> res = n1 - n2;
+                case "x", "X" -> res = n1 * n2;
+                case "/" -> {
+                    while (n2 == 0) {
+                        System.err.println("AL DENOMINADOR HI HA UN 0.\nPER A EVITAR ERROR, COLOCA UN ALTRE NÚMERO.");
+                        numero2 = sc.nextLine();
+                        n2 = Double.parseDouble(numero2);
+                    }
+                    res = n1 / n2;
                 }
-            } while (comprobar != true);
+                case "*" -> res = Math.pow(n1, n2);
+                case "%" -> {
+                    while (n2 == 0) {
+                        System.err.println("AL DENOMINADOR HI HA UN 0.\nPER A EVITAR ERROR, COLOCA UN ALTRE NÚMERO.");
+                        numero2 = sc.nextLine();
+                        n2 = Double.parseDouble(numero2);
+                    }
+                    res = n1 % n2;
+                }
+            }
 
-            System.out.println(&quot;RESULTAT : (&quot; + numero1 + &quot;) &quot; + operacion + &quot; (&quot; + numero2 +
-            &quot;)&quot; + &quot; = &quot; + res);
-            System.out.println(&quot;\n VOLS FER UNA ALTRA OPERACIÓ? \n&quot;);
-            System.out.println(&quot; [s/n]&quot;);
+            System.out.println("RESULTAT: (" + numero1 + ") " + operacion + " (" + numero2 + ") = " + res);
+            System.out.println("\nVOLS FER UNA ALTRA OPERACIÓ?");
+            System.out.println("[s/n]");
             do {
-                comprobar = true;
                 operacion = sc.nextLine();
-
-                switch (operacion) {
-                    case "s":
-                    case "S":
-                    case "n":
-                    case "N":
-                        break;
-                    default:
-                        System.err.println(&quot;\n ERROR. PON UN VALOR VÁLIDO. \n&quot;);
-                        comprobar = false;
+                if (!operacion.matches("[sSnN]")) {
+                    System.err.println("\nERROR. PON UN VALOR VÀLID (s/n).");
                 }
-            } while (comprobar != true);
-        } while (operacion.equals("s") || operacion.equals("S"));
+            } while (!operacion.matches("[sSnN]"));
+
+        } while (operacion.equalsIgnoreCase("s"));
+        sc.close();
     }
 }
