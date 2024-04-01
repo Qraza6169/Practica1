@@ -100,7 +100,7 @@ public class Practica1 {
 
             System.out.println("(" + numero1 + ") " + operacion + " (" + numero2 + ")" + " = " + res);
             System.out.println("\n VOLS CONTINUAR OPERANT? \n");
-            System.out.println(" [s/n]");
+            System.out.println(" [S/N]");
             do {
                 comprobar = true;
                 operacion = sc.nextLine();
