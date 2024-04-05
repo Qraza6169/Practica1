@@ -1,21 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package practica1;
 
 import java.util.Scanner;
 
-/**
- *
- * @author esther
- */
 public class Practica1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         double res = 0;
@@ -23,37 +11,9 @@ public class Practica1 {
         boolean comprobar = false;
 
         do {
-
-            String numero1;
-            do {
-                System.out.println("\n INTRODUEIX EL PRIMER NUMERO ");
-                numero1 = sc.nextLine();
-            } while (!numero1.matches("[+-]?[\\d]*[.]?[\\d]+"));
-            //double nume1 = Double.parseDouble(numero1);
-            double n1 = new Double(numero1);
-
-            do {
-                System.out.println("\n VOLS FER UNA OPERACIÓ? (Indica el signe)");
-                System.out.println(" + = SUMAR \n - = RESTAR \n"
-                        + " x = MULTIPLICAR \n / = DIVIDIR \n * = ELEVAR EL NUMERO 1 AL NUMERO 2."
-                        + "\n % = RESIDU");
-                operacion = sc.nextLine();
-                if (operacion.equals("+") || operacion.equals("-") || operacion.equals("x")
-                        || operacion.equals("X") || operacion.equals("/") || operacion.equals("%")
-                        || operacion.equals("*")) {
-                    comprobar = true;
-                } else {
-                    comprobar = false;
-                }
-            } while (comprobar != true);
-
-            String numero2;
-            do {
-                System.out.println("\n INTRODUEIX EL NUMERO 2.");
-                numero2 = sc.nextLine();
-            } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-            //double nume2 = Double.parseDouble(numero2);
-            double n2 = new Double(numero2);
+            double n1 = obtenerNumero(sc, "\nINTRODUEIX EL PRIMER NUMERO ");
+            operacion = obtenerOperacion(sc);
+            double n2 = obtenerNumero(sc, "\nINTRODUEIX EL NUMERO 2.");
 
             do {
                 comprobar = true;
@@ -70,13 +30,8 @@ public class Practica1 {
                         break;
                     case "/":
                         while (n2 == 0) {
-                            do {
-                                System.err.println(" AL DENOMINADOR HI HA UN 0 \n"
-                                        + "PER EVITAR ERRORS COLOCA ALTRE NUMERO.");
-                                numero2 = sc.nextLine();
-                            } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-              //              nume2 = Double.parseDouble(numero2);
-                            n2 = new Double(numero2);
+                            System.err.println("AL DENOMINADOR HI HA UN 0 \nPER EVITAR ERRORS COLOCA ALTRE NUMERO.");
+                            n2 = obtenerNumero(sc, "\nINTRODUEIX EL NUMERO 2.");
                         }
                         res = n1 / n2;
                         break;
@@ -85,37 +40,44 @@ public class Practica1 {
                         break;
                     case "%":
                         while (n2 == 0) {
-                            do {
-                                System.err.println(" AL DENOMINADOR HI HA UN 0 \n"
-                                        + " PER EVITAR ERRORS COLOCA UN ALTRE NUMERO");
-                                numero2 = sc.nextLine();
-                            } while (!numero2.matches("[+-]?[\\d]*[.]?[\\d]+"));
-                //            nume2 = Double.parseDouble(numero2);
-                            n2 = new Double(numero2);
+                            System.err.println("AL DENOMINADOR HI HA UN 0 \nPER EVITAR ERRORS COLOCA UN ALTRE NUMERO");
+                            n2 = obtenerNumero(sc, "\nINTRODUEIX EL NUMERO 2.");
                         }
                         res = n1 % n2;
                         break;
                 }
             } while (comprobar != true);
 
-            System.out.println("(" + numero1 + ") " + operacion + " (" + numero2 + ")" + " = " + res);
-            System.out.println("\n VOLS CONTINUAR OPERANT? \n");
-            System.out.println(" [s/n]");
-            do {
-                comprobar = true;
-                operacion = sc.nextLine();
-
-                switch (operacion) {
-                    case "s":
-                    case "S":
-                    case "n":
-                    case "N":
-                        break;
-                    default:
-                        System.err.println("\n ERROR, POSA UN VALOR VALID. \n");
-                        comprobar = false;
-                }
-            } while (comprobar != true);
+            System.out.println("(" + n1 + ") " + operacion + " (" + n2 + ")" + " = " + res);
+            System.out.println("\nVOLS CONTINUAR OPERANT? \n[s/n]");
         } while (operacion.equals("s") || operacion.equals("S"));
+
+        sc.close();
+    }
+
+    private static double obtenerNumero(Scanner sc, String mensaje) {
+        double numero;
+        do {
+            System.out.println(mensaje);
+            while (!sc.hasNextDouble()) {
+                System.out.println("INTRODUEIX UN NUMERO VALID");
+                sc.next(); // Consumir entrada inválida
+            }
+            numero = sc.nextDouble();
+        } while (numero == 0); // Puedes ajustar las condiciones de validación según sea necesario
+        return numero;
+    }
+
+    private static String obtenerOperacion(Scanner sc) {
+        String operacion;
+        do {
+            System.out.println("\nVOLS FER UNA OPERACIÓ? (Indica el signe)");
+            System.out.println("+ = SUMAR \n- = RESTAR \nx = MULTIPLICAR \n/ = DIVIDIR \n* = ELEVAR EL NUMERO 1 AL NUMERO 2.\n% = RESIDU");
+            operacion = sc.next();
+        } while (!operacion.equals("+") && !operacion.equals("-") && !operacion.equals("x") && !operacion.equals("X") && !operacion.equals("/") && !operacion.equals("*") && !operacion.equals("%"));
+        return operacion;
     }
 }
+
+
+
