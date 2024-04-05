@@ -11,9 +11,9 @@ public class Practica1 {
         boolean comprobar = false;
 
         do {
-            double n1 = obtenerNumero(sc, "\nINTRODUEIX EL PRIMER NUMERO ");
+            double n1 = obtenerNumero(sc, "\nINTRODUCE EL NUMERO 1 ");
             operacion = obtenerOperacion(sc);
-            double n2 = obtenerNumero(sc, "\nINTRODUEIX EL NUMERO 2.");
+            double n2 = obtenerNumero(sc, "\nINTRODUCE EL NUMERO 2.");
 
             do {
                 comprobar = true;
@@ -30,8 +30,8 @@ public class Practica1 {
                         break;
                     case "/":
                         while (n2 == 0) {
-                            System.err.println("AL DENOMINADOR HI HA UN 0 \nPER EVITAR ERRORS COLOCA ALTRE NUMERO.");
-                            n2 = obtenerNumero(sc, "\nINTRODUEIX EL NUMERO 2.");
+                            System.err.println("EN EL DENOMINADOR HAY UN UN 0 \nPARA EVITAR ERRORES COLOCA OTRO NUMERO.");
+                            n2 = obtenerNumero(sc, "\nINTRODUCE EL NUMERO 2.");
                         }
                         res = n1 / n2;
                         break;
@@ -40,8 +40,8 @@ public class Practica1 {
                         break;
                     case "%":
                         while (n2 == 0) {
-                            System.err.println("AL DENOMINADOR HI HA UN 0 \nPER EVITAR ERRORS COLOCA UN ALTRE NUMERO");
-                            n2 = obtenerNumero(sc, "\nINTRODUEIX EL NUMERO 2.");
+                            System.err.println("EN EL DENOMINADOR HAY UN UN 0 \nPARA EVITAR ERRORES COLOCA OTRO NUMERO."); 
+                            n2 = obtenerNumero(sc, "\nINTRODUCE EL NUMERO 2.");
                         }
                         res = n1 % n2;
                         break;
@@ -49,7 +49,7 @@ public class Practica1 {
             } while (comprobar != true);
 
             System.out.println("(" + n1 + ") " + operacion + " (" + n2 + ")" + " = " + res);
-            System.out.println("\nVOLS CONTINUAR OPERANT? \n[S/N]");
+            System.out.println("\nQUIERES SEGUIR OPERANDO? \n[S/N]");
         } while (operacion.equals("s") || operacion.equals("S"));
 
         sc.close();
@@ -60,7 +60,7 @@ public class Practica1 {
         do {
             System.out.println(mensaje);
             while (!sc.hasNextDouble()) {
-                System.out.println("INTRODUEIX UN NUMERO VALID");
+                System.out.println("INTRODUCE UN NÚMERO VÁLIDO");
                 sc.next(); // Consumir entrada inválida
             }
             numero = sc.nextDouble();
@@ -71,7 +71,7 @@ public class Practica1 {
     private static String obtenerOperacion(Scanner sc) {
         String operacion;
         do {
-            System.out.println("\nVOLS FER UNA OPERACIÓ? (Indica el signe)");
+            System.out.println("\nQUIERES HACER OTRA OPERACION?(Indica el signo)");
             System.out.println("+ = SUMAR \n- = RESTAR \nx = MULTIPLICAR \n/ = DIVIDIR \n* = ELEVAR EL NUMERO 1 AL NUMERO 2.\n% = RESIDU");
             operacion = sc.next();
         } while (!operacion.equals("+") && !operacion.equals("-") && !operacion.equals("x") && !operacion.equals("X") && !operacion.equals("/") && !operacion.equals("*") && !operacion.equals("%"));
