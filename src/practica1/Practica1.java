@@ -49,7 +49,7 @@ public class Practica1 {
             } while (comprobar != true);
 
             System.out.println("(" + n1 + ") " + operacion + " (" + n2 + ")" + " = " + res);
-            System.out.println("\nVOLS CONTINUAR OPERANT? \n[s/n]");
+            System.out.println("\nVOLS CONTINUAR OPERANT? \n[S/N]");
         } while (operacion.equals("s") || operacion.equals("S"));
 
         sc.close();
